@@ -1,18 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Weather App</title>
+  <title>Cricket Scoreboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="container">
-    <h1>🌤 India Weather</h1>
+  <div class="app">
+    <h1>🏏 Live Scoreboard</h1>
 
-    <input type="text" id="city" placeholder="Enter city">
-    <button onclick="getWeather()">Check</button>
+    <div class="teams">
+      <div class="team-box">
+        <h2>India</h2>
+        <p id="scoreA">0/0</p>
+        <p id="oversA">(0.0)</p>
+      </div>
 
-    <div id="result"></div>
+      <div class="vs">VS</div>
+
+      <div class="team-box">
+        <h2>Australia</h2>
+        <p id="scoreB">0/0</p>
+        <p id="oversB">(0.0)</p>
+      </div>
+    </div>
+
+    <div class="controls">
+      <h3>Control Team A</h3>
+      <button onclick="addRun('A',1)">+1</button>
+      <button onclick="addRun('A',4)">+4</button>
+      <button onclick="addRun('A',6)">+6</button>
+      <button onclick="wicket('A')">Wicket</button>
+      <button onclick="ball('A')">Ball</button>
+    </div>
+
+    <div class="controls">
+      <h3>Control Team B</h3>
+      <button onclick="addRun('B',1)">+1</button>
+      <button onclick="addRun('B',4)">+4</button>
+      <button onclick="addRun('B',6)">+6</button>
+      <button onclick="wicket('B')">Wicket</button>
+      <button onclick="ball('B')">Ball</button>
+    </div>
+
+    <button class="reset" onclick="reset()">Reset Match</button>
   </div>
 
   <script src="index.js"></script>
