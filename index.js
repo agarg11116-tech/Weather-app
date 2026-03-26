@@ -12,6 +12,10 @@ function update(team, idScore, idOvers) {
 }
 
 function addRun(team, run) {
+
+let sound = document.getElementById("runSound");
+sound.currentTime = 0;
+sound.play();
   if (team === "A") {
     teamA.runs += run;
     update(teamA, "scoreA", "oversA");
@@ -22,6 +26,10 @@ function addRun(team, run) {
 }
 
 function wicket(team) {
+
+let sound = document.getElementById("wicketSound");
+sound.currentTime = 0;
+sound.play();
   if (team === "A") {
     teamA.wickets++;
     update(teamA, "scoreA", "oversA");
