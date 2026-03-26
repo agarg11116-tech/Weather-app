@@ -1,22 +1,50 @@
-async function getWeather() {
-  const city = document.getElementById("city").value;
+let teamA = { runs: 0, wickets: 0, balls: 0 };
+let teamB = { runs: 0, wickets: 0, balls: 0 };
 
-  const apiKey = "YOUR_API_KEY"; // 👈 yahan apna API key daalo
+function update(team, idScore, idOvers) {
+  const overs = Math.floor(team.balls / 6) + "." + (team.balls % 6);
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city},IN&appid=${apiKey}&units=metric`;
+  document.getElementById(idScore).innerText =
+    `${team.runs}/${team.wickets}`;
 
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
+  document.getElementById(idOvers).innerText =
+    `(${overs})`;
+}
 
-    document.getElementById("result").innerHTML = `
-      <h2>${data.name}</h2>
-      <p>🌡 Temp: ${data.main.temp} °C</p>
-      <p>☁ Weather: ${data.weather[0].main}</p>
-      <p>💧 Humidity: ${data.main.humidity}%</p>
-      <p>🌬 Wind: ${data.wind.speed} m/s</p>
-    `;
-  } catch {
-    alert("Error fetching weather");
+function addRun(team, run) {
+  if (team === "A") {
+    teamA.runs += run;
+    update(teamA, "scoreA", "oversA");
+  } else {
+    teamB.runs += run;
+    update(teamB, "scoreB", "oversB");
   }
+}
+
+function wicket(team) {
+  if (team === "A") {
+    teamA.wickets++;
+    update(teamA, "scoreA", "oversA");
+  } else {
+    teamB.wickets++;
+    update(teamB, "scoreB", "oversB");
+  }
+}
+
+function ball(team) {
+  if (team === "A") {
+    teamA.balls++;
+    update(teamA, "scoreA", "oversA");
+  } else {
+    teamB.balls++;
+    update(teamB, "scoreB", "oversB");
+  }
+}
+
+function reset() {
+  teamA = { runs: 0, wickets: 0, balls: 0 };
+  teamB = { runs: 0, wickets: 0, balls: 0 };
+
+  update(teamA, "scoreA", "oversA");
+  update(teamB, "scoreB", "oversB");
 }
